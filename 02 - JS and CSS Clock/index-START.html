@@ -64,24 +64,47 @@
       top:50%;
       transform-origin: 100%;
       transform: rotate(90deg);
-      transition: all 0.05s;    
-      transition-timing-function: cubic-bezier(0, 3.25, 0.58, 1);    
-          
+      transition: all 0.05s;
+      transition-timing-function: cubic-bezier(0, 3.25, 0.58, 1);
+
     }
 
   </style>
 
   <script>
-      function setDate(){
-          const now = new Date()
-          const seconds = now.getSeconds()
-          console.log(seconds)
-      }
-      
-      setInterval(setDate, 1000)
-      
-            
-      
+    const secondHand = document.querySelector('.second-hand')
+    const minHand    = document.querySelector('.min-hand')
+
+    function setDate(){
+      const now = new Date()
+
+      const seconds = now.getSeconds()
+      const secondsDegrees =  (((seconds/60) * 360) + 90)
+
+      const hours = now.getHours()
+    //   console.log(displayHours(hours))
+
+      const minutes = now.getMinutes()
+      console.log(minutes)
+      const minsDegrees = ((minutes / 60) * 360) + 90
+      console.log(minsDegrees)
+
+
+      secondHand.style.transform = `rotate(${secondsDegrees}deg)`
+      minHand.style.transform    = `rotate(${minsDegrees}deg)`
+    }
+    function displayHours(time){
+        if (time > 12){
+            time = time - 12
+        }
+        return time
+    }
+
+
+    setInterval(setDate, 1000)
+
+
+
   </script>
 </body>
 </html>

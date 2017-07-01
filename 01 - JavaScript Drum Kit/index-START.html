@@ -58,6 +58,37 @@
   <audio data-key="76" src="sounds/tink.wav"></audio>
 
 <script>
+    function playSound(e){
+    const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`) //select by keyCode, using quotes
+    const key = document.querySelector(`.key[data-key="${e.keyCode}"]`) //select by keyCode, using quotes
+
+    if(!audio) return// if no audio attached to keyCode
+
+    audio.currentTime = 0; //set the currentTime to zero so that audio times will play in sucession.
+
+    audio.play()
+    key.classList.add('playing') //adds class to border color and trasfrom
+    // OTHER TYPES OF CLASSLISTS
+    // key.classList.remove('playing')
+    }
+    // key.classList.toggle('playing')
+
+    //select all keys
+    const keys = document.querySelectorAll('.key')
+
+    //loop through all keys and add a listener to each one- the transitioned is a listener that tells if something when thought transition.
+    keys.forEach((key) => {
+        key.addEventListener('transitionend', removeTransition)
+    })
+
+    // once key is marked as transitionend by listener, this will fire
+    function removeTransition(e){
+        if(e.propertyName !== 'transform') return;
+    // whatever the object that it was called on with have it's playing class removed
+        this.classList.remove('playing')
+
+    }
+    window.addEventListener('keydown',playSound)
 
 </script>
 
