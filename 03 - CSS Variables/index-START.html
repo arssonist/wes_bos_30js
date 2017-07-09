@@ -21,7 +21,19 @@
   <img src="https://source.unsplash.com/7bwQXzbF6KE/800x500">
 
   <style>
-
+    :root{
+        --base: #ffc600;
+        --spacing: 10px;
+        --blur: 10px;
+    }
+    img {
+        padding: var(--spacing);
+        background: var(--base);
+        filter: blur(var(--blur));
+    }
+    .hl{
+        color: var(--base);
+    }
     /*
       misc styles, nothing to do with CSS variables
     */
@@ -45,6 +57,30 @@
   </style>
 
   <script>
+  // selct all inputs on the page
+  const inputs = document.querySelectorAll('.controls input')
+  // create function to handle update
+  function handleUpdate(){
+    //   dataset give back all data attr from the element
+      const suffix = this.dataset.sizing ||''
+    //   selecting CSS variable
+    // select name attr, same as --var
+    //set to value from listener
+    //add suffix of px from data value in HTML
+    console.log(document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix))
+
+  }
+// change event for when mouse is let go
+  inputs.forEach((input) => {
+      input.addEventListener('change', handleUpdate)
+  })
+  // change on all mousemove
+  inputs.forEach((input) => {
+      input.addEventListener('mousemove', handleUpdate)
+  })
+
+
+
   </script>
 
 </body>
