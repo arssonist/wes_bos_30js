@@ -31,21 +31,60 @@
 
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
+    inventors.filter((inventor) => {
+        return inventor.year >= 1500 && inventor.year < 1600
+    })
 
     // Array.prototype.map()
     // 2. Give us an array of the inventors' first and last names
-
+    inventors.map((inventor) => {
+        return inventor.first + inventor.last
+    })
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
-
+    // const sort = inventors.sort((inventor1, inventor2) => {
+    //     // use 1 and -1 as wheter to return
+    //     if(inventor1.year > inventor2.year){
+    //         return 1
+    //     } else {
+    //         return -1
+    //     }
+    // })
+    // SORT CONCISE
+    const sort = inventors.sort((inventor1, inventor2) => {
+        return inventor1.year > inventor2.year ? 1 : -1
+    })
+    // console.table(sort)
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live?
+    const totalYearsLived = inventors.reduce((total, inventor) => {
+        return total + (inventor.passed - inventor.year)
+
+    }, 0)
 
     // 5. Sort the inventors by years lived
-
+    var sortLived = inventors.sort((inventor1, inventor2) => {
+        var inv1Years = inventor1.passed - inventor1.year
+        var inv2Years = inventor2.passed - inventor2.year
+        if(inv1Years > inv2Years){
+            return -1
+        } else {
+            return 1
+        }
+    })
+    // OR
+    // return lastInventor > nextInventor ? -1 : 1;
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
-
+// FIRST ATTEMPT - regex won't work
+    var linkLoop = links.forEach((link) => {
+	var re = (/^([abc])((?!\1)([abc]))?((?!(\1|\2))([abc]))?$/)
+	if((link.textContent).match(re)){
+	console.log(true)
+	} else {
+	console.log(false)
+	}
+    })
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
