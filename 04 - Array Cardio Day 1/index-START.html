@@ -75,8 +75,7 @@
     // OR
     // return lastInventor > nextInventor ? -1 : 1;
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
-    // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
-// FIRST ATTEMPT - regex won't work
+
     var linkLoop = links.forEach((link) => {
 	var re = (/^([abc])((?!\1)([abc]))?((?!(\1|\2))([abc]))?$/)
 	if((link.textContent).match(re)){
@@ -86,13 +85,28 @@
 	}
     })
 
-    // 7. sort Exercise
-    // Sort the people alphabetically by last name
 
+    // 7. sort Exercise
+    // Sort the people alphab/*etically by last name
+//      const alpha = people.sort((lastOne, firstOne) => {
+//// sqaure brackets are used to assign variablesto each word- each part of split goes to each variable
+//          var [alast,afirst] = lastOne.split(", ")
+//          var [blast,bfirst] = firstOne.split(", ")
+//          return alast > blast ? 1 : -1
+//          })
+//      console.log(alpha)*/
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
 
+      var tally = data.reduce((current, next) => {
+          if(!current[next]){
+              current[next] = 0
+          }
+         current[next]++
+          return current
+      }, {})
+      console.log(tally)
   </script>
 </body>
 </html>
