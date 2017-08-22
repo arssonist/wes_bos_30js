@@ -26,9 +26,7 @@ let prom = fetch(endpoint)
 .then(data => cities
     // push data with a spread to even it out
     .push(...data))
-console.log(cities
-)
-
+// use filter with match
     // input words that relate to cities
 function  findMatches(wordToMatch,cities){
     return cities.filter(place => {
@@ -36,9 +34,35 @@ function  findMatches(wordToMatch,cities){
         const regex = new RegExp(wordToMatch, 'gi')
         return place.city.match(regex) || place.state.match(regex)
 
-
     })
 }
+// regex function to replace a long number with commas
+function numberWithCommas(x){
+    return x.toString().replace (/\B(?=(\d{3})+(?!\d))/g,',')
+}
+
+
+function displayMatches(){
+// use findMatches function
+    const matchArray = findMatches(this.value, cities)
+// build up html on the page with it
+    const html = matchArray.map(place => {
+        const regex = new RegExp(this.value, 'gi')
+        const cityName = place.city.replace(regex, `<span class="hl">${this.value   }</span>`)
+        const stateName = place.state.replace(regex, `<span class="hl">${this.value   }</span>`)
+        return `<li>
+            <span class="name">${cityName}, ${stateName}</span>
+            <span class="population">${numberWithCommas(place.population)} </span>
+        </li>`
+    }) .join('')
+     suggestions.innerHTML = html
+}
+const searchInput = document.querySelector('.search')
+const suggestions  = document.querySelector('.suggestions')
+
+// listen when clicked and when typed in input
+searchInput.addEventListener('change', displayMatches )
+searchInput.addEventListener('keyup', displayMatches )
 
 
 </script>
