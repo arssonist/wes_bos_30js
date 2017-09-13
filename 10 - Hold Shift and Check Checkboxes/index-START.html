@@ -99,6 +99,54 @@
   </div>
 
 <script>
+
+    var checkedOrder = []
+    var x
+
+    function checkAndShift(e){
+        // console.log(e.shiftKey)
+        if(e.target.checked && e.shiftKey) {
+            return true
+        } else {
+            return false
+        }
+    }
+
+    // get array of inputs
+    var inputs = document.querySelectorAll('input')
+    //  make nodelist and array
+    inputs = Array.from(inputs)
+    //  add listner to seach box
+    inputs.forEach((input) => {
+        input.addEventListener('click', (e) => {
+
+            var index = inputs.indexOf(e.target)
+            console.log(index)
+            checkedOrder.push(index)
+     x = checkedOrder[checkedOrder.length-1];
+    // console.log(x)xx ;
+
+
+            // fill in all boxes
+            if(checkAndShift(e) === true){
+                console.log(index)
+                for (var i = 0; i < index; i++) {
+                    inputs[i].checked = true
+                }
+            }
+
+        })
+
+    })
+    var lastChecked = checkedOrder[1]
+
+    // const checkboxes = document.querySelectorAll('.inbox input[type="checkbox"]');
+    // checkboxes.forEach((checkbox) => {
+    //     checkbox.addEventListener('click',(e)=>{
+    //         handleCheck(e)
+    //     })
+    // })
+
 </script>
 </body>
 </html>
