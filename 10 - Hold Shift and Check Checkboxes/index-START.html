@@ -101,11 +101,19 @@
 <script>
 
     var checkedOrder = []
-    var x
+    var lastChecked;
 
     function checkAndShift(e){
         // console.log(e.shiftKey)
         if(e.target.checked && e.shiftKey) {
+            return true
+        } else {
+            return false
+        }
+    }
+    function checkAndUnshift(e){
+        // console.log(e.shiftKey)
+        if(e.target.checked === false && e.shiftKey) {
             return true
         } else {
             return false
@@ -123,15 +131,23 @@
             var index = inputs.indexOf(e.target)
             console.log(index)
             checkedOrder.push(index)
-     x = checkedOrder[checkedOrder.length-1];
+            lastChecked = checkedOrder[checkedOrder.length-1];
     // console.log(x)xx ;
 
 
             // fill in all boxes
-            if(checkAndShift(e) === true){
+            if(checkedOrder[0] < lastChecked)
+                if(checkAndShift(e) === true){
+                    console.log(index)
+                    // start at first index of array of indexs
+                    for (var i = checkedOrder[0]; i < lastChecked; i++) {
+                        inputs[i].checked = true
+                    }
+                }
+            if(checkAndUnshift(e) === true){
                 console.log(index)
-                for (var i = 0; i < index; i++) {
-                    inputs[i].checked = true
+                for (var i = checkedOrder[0]; i < lastChecked; i++) {
+                    inputs[i].checked = false
                 }
             }
 
