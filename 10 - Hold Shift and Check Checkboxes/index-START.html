@@ -134,13 +134,14 @@
             lastChecked = checkedOrder[checkedOrder.length-1];
     // console.log(x)xx ;
 
-
-            // fill in all boxes
+    // Going downwards
+            // if second check is greater than first
             if(checkedOrder[0] < lastChecked)
                 if(checkAndShift(e) === true){
                     console.log(index)
                     // start at first index of array of indexs
                     for (var i = checkedOrder[0]; i < lastChecked; i++) {
+                        // fill in all boxes
                         inputs[i].checked = true
                     }
                 }
@@ -149,6 +150,15 @@
                 for (var i = checkedOrder[0]; i < lastChecked; i++) {
                     inputs[i].checked = false
                 }
+            }
+            if(checkedOrder[0] > lastChecked)
+                if(checkAndShift(e) === true){
+                    console.log(index)
+                    // start at first index of array of indexs
+                    for (var i = lastChecked; i < checkedOrder[0]; i++) {
+                        // fill in all boxes
+                        inputs[i].checked = true
+                    }
             }
 
         })
