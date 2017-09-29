@@ -58,13 +58,24 @@
       };
     }
 
-    const silderImages = document.querySelectorAll('.slide-in');
+    // select all images that will slide in
+    const sliderImages = document.querySelectorAll('.slide-in');
 
-    function checkSlide(e){
+function checkSlide(e){
         sliderImages.forEach((sliderImage) => {
-            const slideInAt =
-        })
+// /           //get scoll point of Y + and the innerHeight
+            const slideInAt = (window.scrollY +             window.innerHeight) - sliderImage.height / 2;//halfway through image
+            // how far top if image is from top of page
+            const imageBottom = sliderImage.offsetTop + sliderImage.height;//get all the px from page top to image bottom
+            const isHalfShown = slideInAt > sliderImage.offsetTop;
+            const isNotScrolledPast = window.scrollY < imageBottom;
+            if(isHalfShown && isNotScrolledPast){
+                sliderImage.classList.add('active');
+            }
+
+        });
         }
+        // when scroll, checkSlide w debounce
     window.addEventListener('scroll', debounce(checkSlide));
   </script>
 
