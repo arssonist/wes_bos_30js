@@ -30,9 +30,21 @@
   const itemsList = document.querySelector('.plates');
   const items = [];
 
+
+  function addItem(e) {
+      e.preventDefault();
+    //   use this  since submit has name attr
+      const text = this.querySelector('[name=item]').value;
+      const item = {
+          text:text,
+          done:false
+      }
+      console.log(item);
+}
+
+    addItems.addEventListener('submit', addItem)
 </script>
 
 
 </body>
 </html>
-
