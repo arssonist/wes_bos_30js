@@ -28,21 +28,48 @@
 <script>
   const addItems = document.querySelector('.add-items');
   const itemsList = document.querySelector('.plates');
-  const items = [];
+  // try to get from local storage, must use parse to make into data obj
+  // Or blank array if nothing in LS
+  const items = JSON.parse(localStorage.getItem('items')) || [];
 
 
   function addItem(e) {
       e.preventDefault();
-    //   use this  since submit has name attr
+    //   use this  since submit has [name=item] attr
       const text = this.querySelector('[name=item]').value;
       const item = {
           text:text,
           done:false
       }
-      console.log(item);
-}
+      items.push(item);
+      populateList(items,itemsList);
+// localStorage- setitems to add
+    // must stringify first
+      localStorage.setItem('items',JSON.stringify(items));
 
-    addItems.addEventListener('submit', addItem)
+      this.reset();
+      console.log(item);
+  }
+    //   -takes an array with default value blank array
+    //   -places to put in the new html
+  function populateList(plates = [], platesList) {
+      platesList.innerHTML =
+    //   assign the new array or map in var, in the actual html
+       plates.map((plate,i) => {
+// for and input id should be the same
+          return `
+          <li>
+            <input type="checkbox" data-index=${i} id="item${i}" ${plate.done ? 'checked' : ''}  />
+            <label for="item${i}">${plate.text}</label>
+            </li>
+          `;
+      }).join('');
+  }
+
+    addItems.addEventListener('submit', addItem);
+
+    // localStorage is parsed above and then this calls it to load on each refresh
+    populateList(items,itemsList);
 </script>
 
 
