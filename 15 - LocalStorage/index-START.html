@@ -28,21 +28,56 @@
 <script>
   const addItems = document.querySelector('.add-items');
   const itemsList = document.querySelector('.plates');
-  const items = [];
+  //first will try from local storage, make object - or will make blank array
+  const items = JSON.parse(localStorage.getItem('item')) || [];
 
 
   function addItem(e) {
+      // prevent the form from refreshing
       e.preventDefault();
-    //   use this  since submit has name attr
+      //use THIS to refer to the from, and not the whole document
+      // select by name attr on form
       const text = this.querySelector('[name=item]').value;
       const item = {
-          text:text,
+          // text:text,
+          // or
+          text,
           done:false
       }
-      console.log(item);
+      items.push(item);
+      populateList(items, itemsList)
+      // add to local storage must be a string
+      localStorage.setItem('item',JSON.stringify(items));
+      // reset method on the form
+      this.reset();
+}
+function populateList(plates = [], platesList) {
+    platesList.innerHTML =  plates.map((plate,i) => {
+        //ternary operator inside the html-- use to check if box is checked- use the done from the object above
+        return `
+            <li>
+                <input type="checkbox" data-index=${i} id="item${i}" ${plate.done ? 'checked' : ''}/>
+                <label for="item${i}">${plate.text}</label>
+            </li>
+        `
+        // use join to make it one big string
+    }).join('');
+}
+function toggleDone(e){
+    const el = e.target
+    // check that target is a specific one
+    if(!el.matches('input')) return;
+    //this comes from the checkbox data attr
+    const index = el.dataset.index //this is a number
+    // set the array index 'done' to it's oppossite
+    items[index].done = !items[index].done
+    localStorage.setItem('item',JSON.stringify(items));
+    populateList(items,itemsList);
 }
 
-    addItems.addEventListener('submit', addItem)
+addItems.addEventListener('submit', addItem)
+itemsList.addEventListener('click', toggleDone)
+populateList(items,itemsList)
 </script>
 
 
