@@ -26,8 +26,16 @@
     </div>
 
   <script>
-    // 👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀
+  const triggers = document.querySelectorAll('a');
+  const highlight = document.createElement('span');
+  highlight.classList.add('highlight');
+  document.body.append(highlight);
+
+  function highLightLink(){
+      console.log(this)
+  }
+  triggers.forEach(a => a.addEventListener('mouseenter',highLightLink))
+
   </script>
 </body>
 </html>
-

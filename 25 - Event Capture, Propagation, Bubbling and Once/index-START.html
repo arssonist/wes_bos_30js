@@ -39,7 +39,15 @@
 
 <button></button>
 <script>
-
+    const divs = document.querySelectorAll('div');
+    function logText(e) {
+        console.log(e);
+    }
+    divs.forEach(div => div.addEventListener('click', //function(e){
+        // console.log(this)
+    (e) => {
+        console.log(e.target)
+    }))
 </script>
 </body>
 </html>

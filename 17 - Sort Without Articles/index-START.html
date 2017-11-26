@@ -46,7 +46,50 @@
 <script>
 const bands = ['The Plot in You', 'The Devil Wears Prada', 'Pierce the Veil', 'Norma Jean', 'The Bled', 'Say Anything', 'The Midway State', 'We Came as Romans', 'Counterparts', 'Oh, Sleeper', 'A Skylit Drive', 'Anywhere But Here', 'An Old Dog'];
 
+const bands2 = ['Plot in You', 'Devil Wears Prada', 'A', 'Norma Jean', 'B', 'Say Anything', 'Midway State', 'We Came as Romans', 'Counterparts', 'Oh, Sleeper', 'Skylit Drive', 'Anywhere But Here', 'C'];
 
+// both array of words and strings
+// function extract(arrExtract,arrWords) {
+// 	var obj = {}
+//     let names = arrExtract.map((extract) => {
+//         extract = extract.replace(/^a$/gi)
+//
+//
+//         // arrWords.forEach((word) => {
+// 		// if(word == extract){
+// 		// console.log(extract, word)
+// 		// obj[extract] = word;
+//         // }
+//
+// 	// })
+// })
+//   return names
+// }
+
+var b = bands.map((i) => {
+	return i.replace(/^\b(a |the |an)\b/i, "").trim()
+})
+
+b.sort((a,b) => {
+    if(a >b){
+        return 1
+    } else {
+        return -1
+    }
+})
+
+
+// tried function==didn't work
+// function checkWord(toCheck){
+//     //check for a
+//     if(/\b^\a\b/i.test(toCheck)){
+//          return toCheck.replace(/\b^\a\b/i,"")
+//     } else if(/^\bthe\b/i.test(toCheck)){
+//          return toCheck.replace(/^\bthe\b/i,"")
+//     } else if(/^\ban\b/i.test(toCheck))  {
+//         return toCheck.replace(/^\ban\b/i,"s")
+//     }
+// }
 </script>
 
 </body>
